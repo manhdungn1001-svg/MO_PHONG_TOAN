@@ -1,0 +1,547 @@
+﻿<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f4f7fb" />
+    <title>Mô phỏng Toán học — Phép tính ma trận</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#top" aria-label="Trang chủ">
+          <span class="brand-mark" aria-hidden="true"
+            ><span>∑</span><span>▦</span></span
+          >
+          <span class="brand-copy"
+            ><strong>Toán học ứng dụng</strong
+            ><small>PHÒNG THỰC HÀNH SỐ</small></span
+          >
+        </a>
+        <div class="top-meta">
+          <span class="offline-dot"></span> Hoạt động ngoại tuyến
+          <span class="meta-divider"></span> Đại số tuyến tính
+        </div>
+      </header>
+
+      <main id="top">
+        <section class="hero">
+          <div class="hero-copy">
+            <div class="eyebrow">
+              <span class="eyebrow-line"></span> MÔ PHỎNG TƯƠNG TÁC · CHƯƠNG 01
+            </div>
+            <h1>PHÉP TÍNH<br /><span>MA TRẬN</span></h1>
+            <p>
+              Học cách ma trận vận hành — từ phần tử đầu vào đến từng bước biến
+              đổi và kết quả.
+            </p>
+            <div class="hero-tags">
+              <span>01 <b>Nhập dữ liệu</b></span
+              ><i></i><span>02 <b>Chọn quy tắc</b></span
+              ><i></i><span>03 <b>Theo dõi lời giải</b></span>
+            </div>
+          </div>
+          <div class="hero-art" aria-hidden="true">
+            <div class="art-orbit orbit-one"></div>
+            <div class="art-orbit orbit-two"></div>
+            <div class="art-axis axis-x"></div>
+            <div class="art-axis axis-y"></div>
+            <div class="art-card">
+              <span class="art-label">MATRIX · R²</span>
+              <div class="art-bracket">
+                <div class="art-grid"><b>1</b><b>2</b><b>3</b><b>4</b></div>
+              </div>
+              <span class="art-eq">A · B <em>→</em> C</span>
+            </div>
+            <span class="art-plus">+</span><span class="art-dot dot-a"></span
+            ><span class="art-dot dot-b"></span
+            ><span class="art-coordinate">x₁, x₂ ∈ ℝ</span>
+          </div>
+        </section>
+
+        <section class="workbench" aria-label="Bảng thực hành">
+          <div class="section-heading">
+            <div>
+              <div class="eyebrow">
+                <span class="eyebrow-line"></span> BẢNG THỰC HÀNH
+              </div>
+              <h2>Thiết lập phép tính</h2>
+            </div>
+            <button class="text-button" id="resetAll" type="button">
+              <span>↺</span> Làm mới bảng
+            </button>
+          </div>
+          <div class="workspace-grid">
+            <section class="matrix-card" aria-labelledby="titleA">
+              <div class="card-head">
+                <div class="matrix-title">
+                  <span class="matrix-letter">A</span>
+                  <div>
+                    <h3 id="titleA">Ma trận A</h3>
+                    <p class="dimension" id="dimA">2 × 2 · ma trận vuông</p>
+                  </div>
+                </div>
+                <span class="card-index">INPUT / 01</span>
+              </div>
+              <div class="matrix-controls">
+                <label
+                  >Hàng
+                  <select
+                    id="rowsA"
+                    aria-label="Số hàng ma trận A"
+                  ></select></label
+                ><span class="dimension-cross">×</span
+                ><label
+                  >Cột
+                  <select
+                    id="colsA"
+                    aria-label="Số cột ma trận A"
+                  ></select></label
+                ><span class="control-spacer"></span
+                ><button
+                  class="icon-button"
+                  id="randomA"
+                  type="button"
+                  title="Điền ngẫu nhiên"
+                  aria-label="Điền ngẫu nhiên ma trận A"
+                >
+                  ⤨</button
+                ><button
+                  class="icon-button"
+                  id="clearA"
+                  type="button"
+                  title="Xóa dữ liệu"
+                  aria-label="Xóa dữ liệu ma trận A"
+                >
+                  ⌫
+                </button>
+              </div>
+              <div class="matrix-entry-wrap">
+                <div class="matrix-entry" id="entryA"></div>
+              </div>
+              <div class="card-foot">
+                <span class="tiny-status"
+                  ><span class="status-dot"></span> Dữ liệu khả dụng</span
+                ><span>Giá trị thực ∈ ℝ</span>
+              </div>
+            </section>
+
+            <section class="operator-card" aria-label="Chọn phép toán">
+              <div class="operator-label">
+                <span class="operator-line"></span> PHÉP TOÁN
+                <span class="operator-line"></span>
+              </div>
+              <div
+                class="operation-list"
+                role="group"
+                aria-label="Các phép tính ma trận"
+              >
+                <button class="operation active" data-op="add" type="button">
+                  <span class="op-symbol">＋</span
+                  ><span class="op-name">Cộng ma trận</span
+                  ><span class="op-short">A + B</span>
+                </button>
+                <button class="operation" data-op="subtract" type="button">
+                  <span class="op-symbol">−</span
+                  ><span class="op-name">Trừ ma trận</span
+                  ><span class="op-short">A − B</span>
+                </button>
+                <button class="operation" data-op="scalar" type="button">
+                  <span class="op-symbol">κ</span
+                  ><span class="op-name">Nhân vô hướng</span
+                  ><span class="op-short">k · A</span>
+                </button>
+                <button class="operation" data-op="multiply" type="button">
+                  <span class="op-symbol">×</span
+                  ><span class="op-name">Nhân ma trận</span
+                  ><span class="op-short">A × B</span>
+                </button>
+                <button class="operation" data-op="transpose" type="button">
+                  <span class="op-symbol">ᵀ</span
+                  ><span class="op-name">Chuyển vị</span
+                  ><span class="op-short">Aᵀ</span>
+                </button>
+                <button class="operation" data-op="det" type="button">
+                  <span class="op-symbol">|·|</span
+                  ><span class="op-name">Định thức</span
+                  ><span class="op-short">det(A)</span>
+                </button>
+                <button class="operation" data-op="inverse" type="button">
+                  <span class="op-symbol">−1</span
+                  ><span class="op-name">Nghịch đảo</span
+                  ><span class="op-short">A⁻¹</span>
+                </button>
+              </div>
+              <div class="scalar-row" id="scalarRow" hidden>
+                <label for="scalarInput">Hệ số <i>k</i></label
+                ><input
+                  id="scalarInput"
+                  type="number"
+                  step="any"
+                  value="2"
+                  placeholder="Nhập k"
+                /><span>× A</span>
+              </div>
+              <div class="operator-note" id="operatorNote">
+                <span class="note-icon">i</span
+                ><span>Hai ma trận cần cùng số hàng và số cột.</span>
+              </div>
+              <button class="calculate-button" id="calculate" type="button">
+                <span>Bắt đầu giải</span><span>→</span>
+              </button>
+              <div
+                class="validation"
+                id="validation"
+                role="status"
+                aria-live="polite"
+              ></div>
+            </section>
+
+            <section class="matrix-card" aria-labelledby="titleB">
+              <div class="card-head">
+                <div class="matrix-title">
+                  <span class="matrix-letter letter-b">B</span>
+                  <div>
+                    <h3 id="titleB">Ma trận B</h3>
+                    <p class="dimension" id="dimB">2 × 2 · ma trận vuông</p>
+                  </div>
+                </div>
+                <span class="card-index">INPUT / 02</span>
+              </div>
+              <div class="matrix-controls">
+                <label
+                  >Hàng
+                  <select
+                    id="rowsB"
+                    aria-label="Số hàng ma trận B"
+                  ></select></label
+                ><span class="dimension-cross">×</span
+                ><label
+                  >Cột
+                  <select
+                    id="colsB"
+                    aria-label="Số cột ma trận B"
+                  ></select></label
+                ><span class="control-spacer"></span
+                ><button
+                  class="icon-button"
+                  id="randomB"
+                  type="button"
+                  title="Điền ngẫu nhiên"
+                  aria-label="Điền ngẫu nhiên ma trận B"
+                >
+                  ⤨</button
+                ><button
+                  class="icon-button"
+                  id="clearB"
+                  type="button"
+                  title="Xóa dữ liệu"
+                  aria-label="Xóa dữ liệu ma trận B"
+                >
+                  ⌫
+                </button>
+              </div>
+              <div class="matrix-entry-wrap">
+                <div class="matrix-entry" id="entryB"></div>
+              </div>
+              <div class="card-foot">
+                <span class="tiny-status"
+                  ><span class="status-dot"></span> Dữ liệu khả dụng</span
+                ><span>Giá trị thực ∈ ℝ</span>
+              </div>
+            </section>
+          </div>
+          <div class="quick-actions">
+            <button id="exampleButton" type="button">
+              <span>✳</span> Tạo ví dụ mẫu</button
+            ><span class="quick-separator"></span
+            ><button id="generateExercise" type="button">
+              <span>⤨</span> Tạo bài tập ngẫu nhiên</button
+            ><label class="exercise-size"
+              >Cỡ bài
+              <select id="exerciseSize">
+                <option value="2">2 × 2</option>
+                <option value="3">3 × 3</option>
+                <option value="4">4 × 4</option>
+              </select></label
+            ><span class="quick-spacer"></span
+            ><button class="study-toggle" id="studyToggle" type="button">
+              <span class="toggle-icon">◎</span
+              ><span id="studyToggleText">Chế độ giảng viên</span
+              ><span class="toggle-track"><i></i></span>
+            </button>
+          </div>
+        </section>
+
+        <section class="study-panel" id="studyPanel" hidden>
+          <div class="study-intro">
+            <span class="study-badge">LUYỆN TẬP</span>
+            <h2>Tự giải trước, vững kiến thức sau.</h2>
+            <p>
+              Tạo một bài tập, nhập kết quả vào lưới bên dưới rồi kiểm tra. Đáp
+              án luôn đi kèm lời giải từng bước.
+            </p>
+            <button id="showExerciseSolution" class="text-button" type="button">
+              Xem hướng dẫn <span>→</span>
+            </button>
+          </div>
+          <div class="study-work">
+            <div class="study-prompt" id="studyPrompt">
+              Tạo bài tập để bắt đầu.
+            </div>
+            <div id="studentGrid" class="student-grid"></div>
+            <div class="study-actions">
+              <button id="checkAnswer" class="secondary-button" type="button">
+                Kiểm tra đáp án</button
+              ><span id="studyFeedback" role="status" aria-live="polite"></span>
+            </div>
+          </div>
+        </section>
+
+        <section
+          class="result-section"
+          id="resultSection"
+          aria-labelledby="resultTitle"
+        >
+          <div class="result-head">
+            <div>
+              <div class="eyebrow">
+                <span class="eyebrow-line"></span> BẢNG HƯỚNG DẪN TƯƠNG TÁC
+              </div>
+              <h2 id="resultTitle">Cùng giải từng bước</h2>
+            </div>
+            <div class="result-tools">
+              <span class="result-status" id="resultStatus"
+                ><i></i> Chưa bắt đầu</span
+              ><button
+                class="icon-button"
+                id="copyResult"
+                type="button"
+                title="Sao chép kết quả khi hoàn thành"
+                aria-label="Sao chép kết quả"
+              >
+                ▢
+              </button>
+            </div>
+          </div>
+          <div class="lesson-progress">
+            <div>
+              <span>TIẾN TRÌNH</span
+              ><strong id="stepCounter">Chưa bắt đầu</strong>
+            </div>
+            <div class="step-track">
+              <div class="step-progress" id="stepProgress"></div>
+            </div>
+            <span id="progressPercent">0%</span>
+          </div>
+          <div class="lesson-grid">
+            <article class="lesson-board">
+              <div class="panel-label">
+                <span class="panel-step">01</span> MÔ PHỎNG MA TRẬN
+              </div>
+              <div class="lesson-matrices" id="lessonMatrices">
+                <div class="lesson-empty">
+                  Nhập ma trận, chọn phép tính rồi bắt đầu giải.
+                </div>
+              </div>
+              <div class="lesson-controls">
+                <button id="stepPrev" class="secondary-button" type="button">
+                  ← Bước trước</button
+                ><button id="stepNext" class="calculate-button" type="button">
+                  <span>Bắt đầu giải</span><span>→</span></button
+                ><button id="stepAuto" class="secondary-button" type="button">
+                  ▶ Tự động</button
+                ><button
+                  id="stepPause"
+                  class="icon-button"
+                  type="button"
+                  title="Tạm dừng"
+                >
+                  Ⅱ</button
+                ><button
+                  id="stepReset"
+                  class="icon-button"
+                  type="button"
+                  title="Làm lại"
+                >
+                  ↺
+                </button>
+              </div>
+            </article>
+            <article class="lesson-coach">
+              <div class="coach-kicker">
+                <span class="coach-bulb">✦</span> GIẢNG VIÊN ẢO
+                <button id="reminderToggle" class="coach-link" type="button">
+                  Nhắc lại kiến thức
+                </button>
+              </div>
+              <div id="stepStage" class="step-stage">
+                <span class="stage-number">SẴN SÀNG</span>
+                <h3>Khám phá lời giải</h3>
+                <p>
+                  Nhấn “Bắt đầu giải”. Mỗi lần tiếp tục, một thao tác mới cùng
+                  hướng dẫn sẽ xuất hiện.
+                </p>
+                <div class="empty-formula">A · B → C</div>
+              </div>
+              <div class="why-box" id="whyBox">
+                <strong>HƯỚNG DẪN</strong>
+                <p id="whyText">
+                  Bạn sẽ thấy giải thích ngắn gọn cho từng bước tại đây.
+                </p>
+                <button id="whyToggle" type="button">Tại sao?</button>
+              </div>
+              <div class="why-theory" id="whyTheory" hidden>
+                <strong>VÌ SAO LÀM NHƯ VẬY?</strong>
+                <p>
+                  Quy tắc của phép toán cho biết phần tử nào cần kết hợp và theo
+                  thứ tự nào. Làm từng phần tử giúp ta theo dõi chính xác cách
+                  dữ liệu đầu vào tạo nên kết quả.
+                </p>
+              </div>
+              <div class="general-rule" id="generalRule" hidden>
+                <strong>QUY TẮC TỔNG QUÁT</strong>
+                <p>
+                  Trong tích AB, phần tử cᵢⱼ là tích vô hướng giữa hàng i của A
+                  và cột j của B: <b>cᵢⱼ = Σ aᵢₖbₖⱼ</b>.
+                </p>
+              </div>
+              <div class="student-prompt" id="studentPrompt" hidden>
+                <label id="studentQuestion" for="studentGuess"
+                  >Theo bạn, kết quả bước này bằng bao nhiêu?</label
+                >
+                <div>
+                  <input
+                    id="studentGuess"
+                    type="number"
+                    step="any"
+                    placeholder="Nhập kết quả"
+                  /><button
+                    id="checkStepGuess"
+                    class="secondary-button"
+                    type="button"
+                  >
+                    Kiểm tra
+                  </button>
+                </div>
+                <p id="studentGuessFeedback" role="status"></p>
+              </div>
+              <div class="lesson-finish" id="lessonFinish" hidden>
+                <span>✓</span><strong>Hoàn thành</strong>
+                <p id="finishText">Bạn đã hoàn thành phép tính.</p>
+                <div>
+                  <button
+                    id="reviewSteps"
+                    class="secondary-button"
+                    type="button"
+                  >
+                    Xem lại các bước</button
+                  ><button
+                    id="restartLesson"
+                    class="secondary-button"
+                    type="button"
+                  >
+                    Làm lại</button
+                  ><button
+                    id="newExercise"
+                    class="secondary-button"
+                    type="button"
+                  >
+                    Tạo bài mới
+                  </button>
+                </div>
+              </div>
+            </article>
+          </div>
+          <div class="teacher-tools">
+            <span>ĐIỀU KHIỂN GIẢNG VIÊN</span
+            ><button id="showWhy" type="button">Hiện hướng dẫn</button
+            ><button id="hideWhy" type="button">Ẩn hướng dẫn</button
+            ><button id="highlightToggle" type="button">Làm nổi bật ô</button
+            ><button id="formulaToggle" type="button">
+              Hiện công thức tổng quát</button
+            ><span class="teacher-spacer"></span
+            ><label
+              >Nhịp tự động
+              <select id="autoSpeed">
+                <option value="2400">Chậm · 2.4 giây</option>
+                <option value="1800" selected>Vừa · 1.8 giây</option>
+                <option value="1200">Nhanh · 1.2 giây</option>
+              </select></label
+            >
+          </div>
+        </section>
+
+        <section class="rules-section">
+          <div class="rules-title">
+            <div>
+              <div class="eyebrow">
+                <span class="eyebrow-line"></span> GHI NHỚ NHANH
+              </div>
+              <h2>Quy tắc cần nhớ</h2>
+            </div>
+            <span class="rules-caption">CÔNG THỨC CỐT LÕI</span>
+          </div>
+          <div class="rule-grid">
+            <article class="rule-card">
+              <span class="rule-index">01 / CỘNG &amp; TRỪ</span>
+              <div class="rule-formula">C = A ± B</div>
+              <p>
+                Hai ma trận phải cùng kích thước. Tính từng phần tử tại đúng vị
+                trí tương ứng.
+              </p>
+              <div class="rule-mini">
+                <span>cᵢⱼ</span><span>=</span><span>aᵢⱼ</span><span>±</span
+                ><span>bᵢⱼ</span>
+              </div>
+            </article>
+            <article class="rule-card">
+              <span class="rule-index">02 / NHÂN MA TRẬN</span>
+              <div class="rule-formula">C = AB</div>
+              <p>
+                Số cột của A phải bằng số hàng của B. Ghép hàng của A với cột
+                của B.
+              </p>
+              <div class="rule-mini">
+                <span>cᵢⱼ</span><span>=</span><span>∑ aᵢₖ · bₖⱼ</span>
+              </div>
+            </article>
+            <article class="rule-card">
+              <span class="rule-index">03 / CHUYỂN VỊ</span>
+              <div class="rule-formula">(Aᵀ)ᵢⱼ = Aⱼᵢ</div>
+              <p>
+                Đổi vị trí hàng và cột. Hàng thứ i của A trở thành cột thứ i của
+                Aᵀ.
+              </p>
+              <div class="rule-mini">
+                <span>m × n</span><span>→</span><span>n × m</span>
+              </div>
+            </article>
+          </div>
+          <div class="matrix-multiplication-note">
+            <span class="note-math">Σ</span>
+            <p>
+              <strong>Ý tưởng của phép nhân:</strong> Mỗi phần tử kết quả được
+              tính bằng tổng các tích giữa một hàng của A và một cột tương ứng
+              của B.
+            </p>
+            <span class="note-index">LINEAR ALGEBRA · 01</span>
+          </div>
+        </section>
+        <footer>
+          <a class="brand footer-brand" href="#top"
+            ><span class="brand-mark" aria-hidden="true"
+              ><span>∑</span><span>▦</span></span
+            ><span class="brand-copy"
+              ><strong>Toán học ứng dụng</strong
+              ><small>PHÒNG THỰC HÀNH SỐ</small></span
+            ></a
+          ><span>Học bằng cách nhìn thấy từng bước.</span
+          ><span>ĐẠI SỐ TUYẾN TÍNH <i>·</i> MA TRẬN</span>
+        </footer>
+      </main>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
